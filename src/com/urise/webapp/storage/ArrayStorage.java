@@ -25,35 +25,37 @@ public class ArrayStorage {
                 System.out.println("Resume exist in the array.");
             }
         } else {
-            System.out.println("ERROR: Overflow. The maximum number of resumes is 10,000.");
+            System.out.println("ERROR: Overflow. The maximum number of resumes is 10 000.");
         }
     }
 
-    public Resume get(String uuid) {
-        if (checkUuid(uuid) >= 0) {
-            return storage[checkUuid(uuid)];
-        } else {
-            System.out.println("Resume not exist in the array");
-            return null;
+    public Resume get(Resume resume) {
+        int index = checkResume(resume);
+        if (index >= 0) {
+            return storage[index];
         }
+        System.out.println("Resume doesn't exist in the array");
+        return null;
     }
 
     public void update(Resume resume) {
-        if (checkResume(resume) >= 0) {
-            storage[checkResume(resume)] = resume;
-            System.out.println("\nUpdated resume : " + storage[checkResume(resume)]);
+        int index = checkResume(resume);
+        if (index >= 0) {
+            storage[index] = resume;
+            System.out.println("\nUpdated resume : " + storage[index]);
         } else {
-            System.out.println("Resume not exist in the array.");
+            System.out.println("Resume doesn't exist in the array.");
         }
     }
 
-    public void delete(String uuid) {
-        if (checkUuid(uuid) >= 0) {
-            storage[checkUuid(uuid)] = storage[size - 1];
+    public void delete(Resume resume) {
+        int index = checkResume(resume);
+        if (index >= 0) {
+            storage[index] = storage[size - 1];
             storage[size - 1] = null;
             size--;
         } else {
-            System.out.println("Resume not exist in the array");
+            System.out.println("Resume doesn't exist in the array");
         }
     }
 
@@ -68,23 +70,12 @@ public class ArrayStorage {
         return size;
     }
 
-    public int checkUuid(String uuid) {
-        int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                index = i;
-            }
-        }
-        return index;
-    }
-
-    public int checkResume(Resume resume) {
-        int index = -1;
+    private int checkResume(Resume resume) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(resume.getUuid())) {
-                index = i;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 }
