@@ -1,15 +1,14 @@
-package com.urise.webapp;
+package ru.javawebinar.basejava;
 
-import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.ArrayStorage;
+import ru.javawebinar.basejava.model.Resume;
+import ru.javawebinar.basejava.storage.ArrayStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for com.urise.webapp.storage.ArrayStorage implementation
- * (just run, no need to understand)
+ * Test for ru.javawebinar.basejava.storage.ArrayStorage
  */
 public class MainArray {
     private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
@@ -41,22 +40,18 @@ public class MainArray {
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;
-                case "delete":
-                    r = new Resume();
-                    r.setUuid(uuid);
-                    ARRAY_STORAGE.delete(r);
-                    printAll();
-                    break;
-                case "get":
-                    r = new Resume();
-                    r.setUuid(uuid);
-                    System.out.println(ARRAY_STORAGE.get(r));
-                    break;
                 case "update":
                     r = new Resume();
                     r.setUuid(uuid);
                     ARRAY_STORAGE.update(r);
                     printAll();
+                    break;
+                case "delete":
+                    ARRAY_STORAGE.delete(uuid);
+                    printAll();
+                    break;
+                case "get":
+                    System.out.println(ARRAY_STORAGE.get(uuid));
                     break;
                 case "clear":
                     ARRAY_STORAGE.clear();
