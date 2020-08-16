@@ -25,6 +25,7 @@ public class MainCollections {
 
         for (Resume resume : collection) {
             System.out.println(resume);
+            //System.out.println(resume.getUuid());
             if (Objects.equals(resume.getUuid(), UUID_1)) {
                 //collection.remove(resume);
             }
