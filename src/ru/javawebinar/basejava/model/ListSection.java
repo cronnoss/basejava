@@ -3,7 +3,7 @@ package ru.javawebinar.basejava.model;
 import java.util.List;
 import java.util.Objects;
 
-public class ListSection extends Section{
+public class ListSection extends Section {
     private final List<String> items;
 
     public ListSection(List<String> items) {
@@ -13,11 +13,6 @@ public class ListSection extends Section{
 
     public List<String> getItems() {
         return items;
-    }
-
-    @Override
-    public String toString() {
-        return items.toString();
     }
 
     @Override
@@ -33,5 +28,14 @@ public class ListSection extends Section{
     @Override
     public int hashCode() {
         return items.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : items) {
+            stringBuilder.append(s).append('\n');
+        }
+        return stringBuilder.toString();
     }
 }
