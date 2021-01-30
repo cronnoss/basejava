@@ -12,11 +12,9 @@ public class Resume implements Comparable<Resume> {
 
     // Unique identifier
     private final String uuid;
-
     private final String fullName;
-
-    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
-    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+    private Map<ContactType, Link> contact= new EnumMap<>(ContactType.class);
+    private Map<SectionType, Section> section= new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -33,33 +31,38 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
-    public String getContact(ContactType type) {
-        return contacts.get(type);
+    public String getFullName() {
+        return fullName;
     }
 
-    public Section getSection(SectionType type) {
-        return sections.get(type);
+    public Map<ContactType, Link> getContact() {
+        return contact;
     }
 
-    public void addContact(ContactType type, String contact) {
-        contacts.put(type, contact);
+    public Map<SectionType, Section> getSection() {
+        return section;
     }
 
-    public void addSection(SectionType type, Section section) {
-        sections.put(type, section);
+    public void setContact(ContactType type, String text, String url) {
+        this.contact.put(type, new Link(text, url));
+    }
+
+    public void setSection(SectionType type, Section section) {
+        this.section.put(type, section);
+    }
+
+    @Override
+    public String toString() {
+        return ("Name: " + fullName + " Uuid: " + uuid);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Resume resume = (Resume) o;
-
         if (!uuid.equals(resume.uuid)) return false;
-        if (!fullName.equals(resume.fullName)) return false;
-
-        return true;
+        return fullName.equals(resume.fullName);
     }
 
     @Override
@@ -67,11 +70,6 @@ public class Resume implements Comparable<Resume> {
         int result = uuid.hashCode();
         result = 31 * result + fullName.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return uuid + '(' + fullName + ')';
     }
 
     @Override
