@@ -9,13 +9,13 @@ import java.util.Map;
 public class ResumeTestData {
     public static void main(String[] args) {
         Resume resume = new Resume("Кислин Григорий");
-        resume.setContact(ContactType.PHONE, "+7(921) 855-0482", null);
-        resume.setContact(ContactType.SKYPE, "grigory.kislin", "skype:grigory.kislin");
-        resume.setContact(ContactType.MAIL, "gkislin@yandex.ru", "gkislin@yandex.ru");
-        resume.setContact(ContactType.LINKEDIN, "Профиль LinkeId", "https://www.linkedin.com/in/gkislin");
-        resume.setContact(ContactType.GITHUB, "Профиль GitHub", "https://github.com/gkislin");
-        resume.setContact(ContactType.STACKOVERFLOW, "Профиль StackOverflow", "https://stackoverflow.com/users/548473/grigory-kislin");
-        resume.setContact(ContactType.HOME_PAGE, "Домашняя страницв", "http://gkislin.ru/");
+        resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
+        resume.setContact(ContactType.SKYPE, "grigory.kislin");
+        resume.setContact(ContactType.MAIL, "gkislin@yandex.ru");
+        resume.setContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/gkislin");
+        resume.setContact(ContactType.GITHUB, "https://github.com/gkislin");
+        resume.setContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473/grigory-kislin");
+        resume.setContact(ContactType.HOME_PAGE, "http://gkislin.ru/");
 
         resume.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
         resume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
@@ -89,8 +89,8 @@ public class ResumeTestData {
                 new Organization("Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/", LocalDate.of(1984, 9, 1),
                         LocalDate.of(1987, 6, 1), "Закончил с отличием", ""))));
 
-        Map<ContactType, Link> testContact = resume.getContact();
-        for (Map.Entry<ContactType, Link> item : testContact.entrySet()) {
+        Map<ContactType, String> testContact = resume.getContact();
+        for (Map.Entry<ContactType, String> item : testContact.entrySet()) {
             System.out.println(item);
         }
 
