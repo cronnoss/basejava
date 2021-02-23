@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
@@ -19,6 +19,8 @@ import static ru.javawebinar.basejava.util.DateUtil.of;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    public static final Organization EMPTY = new Organization("", "", Position.EMPTY);
 
     private Link homePage;
     private List<Position> positions = new ArrayList<>();
@@ -47,10 +49,9 @@ public class Organization implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Organization that = (Organization) o;
-
-        return Objects.equals(homePage, that.homePage) && Objects.equals(positions, that.positions);
+        return Objects.equals(homePage, that.homePage) &&
+                Objects.equals(positions, that.positions);
     }
 
     @Override
@@ -65,6 +66,7 @@ public class Organization implements Serializable {
 
     @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
+        public static final Position EMPTY = new Position();
 
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate;
@@ -114,9 +116,7 @@ public class Organization implements Serializable {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
             Position position = (Position) o;
-
             return Objects.equals(startDate, position.startDate) &&
                     Objects.equals(endDate, position.endDate) &&
                     Objects.equals(title, position.title) &&
